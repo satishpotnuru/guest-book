@@ -54,6 +54,7 @@ public class GuestBookServiceImpl implements GuestBookService {
 		BookEntry bookEntryEntity = new BookEntry();
 		bookEntryEntity.setUserid(bookentry.getUserid());
 		bookEntryEntity.setComments(bookentry.getComments());
+		bookEntryEntity.setStatus("Pending");
 		bookEntryRepository.save(bookEntryEntity);
 	}
 
