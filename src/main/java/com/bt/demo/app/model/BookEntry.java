@@ -19,29 +19,30 @@ public class BookEntry {
 	 private String comments;
 	 private String status;
 	 
-	public int getId() {
+	 public int getId() {
 		return id;
-	}
-	public void setId(int id) {
+	 }
+	 public void setId(int id) {
 		this.id = id;
-	}
-	public long getUserid() {
+	 }
+	 public long getUserid() {
 		return userid;
-	}
-	public void setUserid(long userid) {
+	 }
+	 public void setUserid(long userid) {
 		this.userid = userid;
-	}
-	public String getComments() {
+	 }
+	 public String getComments() {
 		return comments;
-	}
-	public void setComments(String comments) {
+	 }
+	 public void setComments(String comments) {
 		this.comments = comments;
-	}
-	public String isStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
+	 }
+	 public String getStatus() {
+			return status;
+	 }
+	 public void setStatus(String status) {
+			this.status = status;
+	 }
+	
 	 
 }
