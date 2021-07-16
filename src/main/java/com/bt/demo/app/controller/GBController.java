@@ -32,6 +32,12 @@ public class GBController {
 		return guestBookSvc.getAllEntries();
 	}
 	
+	@GetMapping("/admin/entry")
+	public BookEntry getEntry(@RequestParam("entryid") int entryid) {
+		System.out.println("single entry");
+		return guestBookSvc.getEntry(entryid);
+	}
+	
 	
 	@PutMapping("/admin/approveentry")
 	public void approveEntry(@RequestParam("entryid") int entryid) {
@@ -51,7 +57,14 @@ public class GBController {
 	
 	@PostMapping("/guest/addentry")
 	public void addEntry(@RequestBody BookEntryVO bookentry) {
+		System.out.println("in add entry");
 		guestBookSvc.addEntry(bookentry);
+	}
+	
+	@GetMapping("/usertype")
+	public String getUserType(@RequestParam("username") String username) {
+		System.out.println("username : "+ username);
+		return guestBookSvc.getUserType(username);
 	}
 
 }

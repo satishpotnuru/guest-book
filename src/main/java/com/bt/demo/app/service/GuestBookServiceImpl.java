@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import com.bt.demo.app.model.BookEntry;
 import com.bt.demo.app.model.BookEntryVO;
+import com.bt.demo.app.model.User;
 import com.bt.demo.app.repository.BookEntryRepository;
 import com.bt.demo.app.repository.UserRepository;
 
@@ -42,20 +43,36 @@ public class GuestBookServiceImpl implements GuestBookService {
 	@Override
 	public void updateEntry(BookEntryVO bookentry) {
 		Optional<BookEntry> bookEntryOpt = bookEntryRepository.findById(bookentry.getId());
-		if( bookEntryOpt.isPresent()) {
-			BookEntry bookEntryEntity = bookEntryOpt.get();
-			bookEntryEntity.setComments(bookentry.getComments());
-			bookEntryRepository.save(bookEntryEntity);
-		}
+		if(bookEntryOpt.isPresent()) {
+		  BookEntry bookEntryEntity = bookEntryOpt.get();
+		  bookEntryEntity.setComments(bookentry.getComments());
+		  bookEntryRepository.save(bookEntryEntity); }
 	}
 
 	@Override
 	public void addEntry(BookEntryVO bookentry) {
 		BookEntry bookEntryEntity = new BookEntry();
-		bookEntryEntity.setUserid(bookentry.getUserid());
+		bookEntryEntity.setUsername(bookentry.getUsername());
 		bookEntryEntity.setComments(bookentry.getComments());
 		bookEntryEntity.setStatus("Pending");
 		bookEntryRepository.save(bookEntryEntity);
+	}
+
+	@Override
+	public BookEntry getEntry(int id) {
+		Optional<BookEntry> bookEntryOpt = bookEntryRepository.findById(id);
+		if( bookEntryOpt.isPresent()) {
+			return bookEntryOpt.get();
+		}
+		return null;
+	}
+	
+	@Override
+	public String getUserType(String username) {
+		if(username != null) {
+		User user = userRepository.findByUsername(username);
+		return user.getType();
+		}else return null;
 	}
 
 }

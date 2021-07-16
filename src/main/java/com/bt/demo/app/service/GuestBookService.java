@@ -10,6 +10,9 @@ import com.bt.demo.app.model.BookEntryVO;
 @Service
 public interface GuestBookService {
 	
+	
+	String getUserType(String username);
+	BookEntry getEntry(int id);
 	List<BookEntry> getAllEntries();
 	void approveEntry(int id);
 	void deleteEntry(int id);

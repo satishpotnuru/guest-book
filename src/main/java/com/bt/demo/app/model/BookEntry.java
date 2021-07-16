@@ -15,7 +15,7 @@ public class BookEntry {
 	 @GeneratedValue(strategy = GenerationType.AUTO)
 	 @Column(name="id")
 	 private int id;
-	 private long userid;
+	 private String username;
 	 private String comments;
 	 private String status;
 	 
@@ -25,11 +25,11 @@ public class BookEntry {
 	 public void setId(int id) {
 		this.id = id;
 	 }
-	 public long getUserid() {
-		return userid;
+	 public String getUsername() {
+		return username;
 	 }
-	 public void setUserid(long userid) {
-		this.userid = userid;
+	 public void setUsername(String username) {
+		this.username = username;
 	 }
 	 public String getComments() {
 		return comments;
