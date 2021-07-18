@@ -3,6 +3,7 @@ package com.bt.demo.app.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bt.demo.app.model.BookEntry;
 import com.bt.demo.app.model.BookEntryVO;
@@ -18,5 +19,5 @@ public interface GuestBookService {
 	void deleteEntry(int id);
 	void updateEntry(BookEntryVO bookentry);
 	void addEntry(BookEntryVO bookentry);
-
+    BookEntry uploadFile(MultipartFile file);
 }
