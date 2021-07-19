@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.bt.demo.app.model.BookEntry;
 
 @Repository
-public interface BookEntryRepository extends JpaRepository<BookEntry, Integer> {
+public interface BookEntryRepository extends JpaRepository<BookEntry, Long> {
 
 }

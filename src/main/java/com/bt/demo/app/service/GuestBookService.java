@@ -6,18 +6,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bt.demo.app.model.BookEntry;
-import com.bt.demo.app.model.BookEntryVO;
+import com.bt.demo.app.model.BookEntryDTO;
 
 @Service
 public interface GuestBookService {
 	
-	
 	String getUserType(String username);
-	BookEntry getEntry(int id);
+	BookEntry getBookEntry(long id);
 	List<BookEntry> getAllEntries();
-	void approveEntry(int id);
-	void deleteEntry(int id);
-	void updateEntry(BookEntryVO bookentry);
-	void addEntry(BookEntryVO bookentry);
+	void approveBookEntry(long id);
+	void deleteBookEntry(long id);
+	void updateBookEntry(BookEntryDTO bookentry);
+	void addBookEntry(BookEntryDTO bookentry);
     BookEntry uploadFile(MultipartFile file);
 }

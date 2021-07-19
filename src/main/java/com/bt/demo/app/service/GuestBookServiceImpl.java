@@ -9,8 +9,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bt.demo.app.exception.FileStorageException;
 import com.bt.demo.app.model.BookEntry;
-import com.bt.demo.app.model.BookEntryVO;
+import com.bt.demo.app.model.BookEntryDTO;
 import com.bt.demo.app.model.User;
 import com.bt.demo.app.repository.BookEntryRepository;
 import com.bt.demo.app.repository.UserRepository;
@@ -29,7 +30,7 @@ public class GuestBookServiceImpl implements GuestBookService {
 	}
 
 	@Override
-	public void approveEntry(int id) {
+	public void approveBookEntry(long id) {
 		Optional<BookEntry> bookEntryOpt = bookEntryRepository.findById(id);
 		if( bookEntryOpt.isPresent()) {
 			BookEntry bookEntryEntity = bookEntryOpt.get();
@@ -39,21 +40,22 @@ public class GuestBookServiceImpl implements GuestBookService {
 	}
 
 	@Override
-	public void deleteEntry(int id) {
+	public void deleteBookEntry(long id) {
 		bookEntryRepository.deleteById(id);
 	}
 
 	@Override
-	public void updateEntry(BookEntryVO bookentry) {
+	public void updateBookEntry(BookEntryDTO bookentry) {
 		Optional<BookEntry> bookEntryOpt = bookEntryRepository.findById(bookentry.getId());
 		if(bookEntryOpt.isPresent()) {
 		  BookEntry bookEntryEntity = bookEntryOpt.get();
 		  bookEntryEntity.setComments(bookentry.getComments());
-		  bookEntryRepository.save(bookEntryEntity); }
+		  bookEntryRepository.save(bookEntryEntity); 
+		  }
 	}
 
 	@Override
-	public void addEntry(BookEntryVO bookentry) {
+	public void addBookEntry(BookEntryDTO bookentry) {
 		BookEntry bookEntryEntity = new BookEntry();
 		bookEntryEntity.setUsername(bookentry.getUsername());
 		bookEntryEntity.setComments(bookentry.getComments());
@@ -62,7 +64,7 @@ public class GuestBookServiceImpl implements GuestBookService {
 	}
 
 	@Override
-	public BookEntry getEntry(int id) {
+	public BookEntry getBookEntry(long id) {
 		Optional<BookEntry> bookEntryOpt = bookEntryRepository.findById(id);
 		if( bookEntryOpt.isPresent()) {
 			return bookEntryOpt.get();
@@ -90,9 +92,10 @@ public class GuestBookServiceImpl implements GuestBookService {
 			bookEntryEntity.setStatus("Pending");
 			bookEntryRepository.save(bookEntryEntity);
 		}catch(IOException ex) {
-			
+			throw new FileStorageException("File storing failed", ex);
 		}
 		return bookEntryEntity;
 	}
 
 }
+;

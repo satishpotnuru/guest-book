@@ -15,7 +15,7 @@ public class BookEntry {
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.AUTO)
 	 @Column(name="id")
-	 private int id;
+	 private long id;
 	 private String username;
 	 private String comments;
 	 @Lob
@@ -24,10 +24,10 @@ public class BookEntry {
 	 private String fileType;
 	 private String status;
 	 
-	 public int getId() {
+	 public long getId() {
 		return id;
 	 }
-	 public void setId(int id) {
+	 public void setId(long id) {
 		this.id = id;
 	 }
 	 public String getUsername() {

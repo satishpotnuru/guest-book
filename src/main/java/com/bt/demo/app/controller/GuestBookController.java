@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bt.demo.app.model.BookEntry;
-import com.bt.demo.app.model.BookEntryVO;
+import com.bt.demo.app.model.BookEntryDTO;
 import com.bt.demo.app.service.GuestBookService;
 
 @RestController
@@ -35,53 +35,49 @@ public class GuestBookController {
 	
 	@GetMapping("/admin/entries")
 	public List<BookEntry> getEntries() {
-		System.out.println("got call");
 		return guestBookSvc.getAllEntries();
 	}
 	
 	@GetMapping("/admin/entry")
 	public BookEntry getEntry(@RequestParam("entryid") int entryid) {
-		System.out.println("single entry");
-		return guestBookSvc.getEntry(entryid);
+		return guestBookSvc.getBookEntry(entryid);
 	}
 	
 	
 	@PutMapping("/admin/approveentry")
 	public void approveEntry(@RequestParam("entryid") int entryid) {
-		guestBookSvc.approveEntry(entryid);
+		guestBookSvc.approveBookEntry(entryid);
 	}
 	
 	@PutMapping("/admin/editentry")
-	public void editEntry(@RequestBody BookEntryVO bookentry) {
-		guestBookSvc.updateEntry(bookentry);
+	public void editEntry(@RequestBody BookEntryDTO bookentry) {
+		guestBookSvc.updateBookEntry(bookentry);
 	}
 	
 	
 	@DeleteMapping("/admin/removeentry")
 	public void removeEntry(@RequestParam("entryid") int entryid){
-		guestBookSvc.deleteEntry(entryid);
+		guestBookSvc.deleteBookEntry(entryid);
 	}
 	
 	@PostMapping("/guest/addentry")
-	public void addEntry(@RequestBody BookEntryVO bookentry) {
-		System.out.println("in add entry");
-		guestBookSvc.addEntry(bookentry);
+	public void addEntry(@RequestBody BookEntryDTO bookentry) {
+		guestBookSvc.addBookEntry(bookentry);
 	}
 	
 	@GetMapping("/usertype")
 	public String getUserType(@RequestParam("username") String username) {
-		System.out.println("username : "+ username);
 		return guestBookSvc.getUserType(username);
 	}
 	
-	@PostMapping("/uploadFile")
+	@PostMapping("/uploadfile")
     public BookEntry uploadFile(@RequestParam("file") MultipartFile file) {
 		return guestBookSvc.uploadFile(file);
     } 
 	
-	@GetMapping("/downloadFile")
+	@GetMapping("/downloadfile")
 	public ResponseEntity<Resource> downloadFile(@RequestParam("entryid") int entryid){
-		BookEntry bookEntry = guestBookSvc.getEntry(entryid);
+		BookEntry bookEntry = guestBookSvc.getBookEntry(entryid);
 		return ResponseEntity.ok()
 	            .contentType(MediaType.parseMediaType(bookEntry.getFileType()))
 	            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + bookEntry.getFileName() + "\"")
