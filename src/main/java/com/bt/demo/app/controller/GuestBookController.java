@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,15 +39,15 @@ public class GuestBookController {
 		return guestBookSvc.getAllEntries();
 	}
 	
-	@GetMapping("/admin/entry")
-	public BookEntry getEntry(@RequestParam("entryid") int entryid) {
-		return guestBookSvc.getBookEntry(entryid);
+	@GetMapping("/admin/entry/{id}")
+	public BookEntry getEntry(@PathVariable("id") long id) {
+		return guestBookSvc.getBookEntry(id);
 	}
 	
 	
-	@PutMapping("/admin/approveentry")
-	public void approveEntry(@RequestParam("entryid") int entryid) {
-		guestBookSvc.approveBookEntry(entryid);
+	@PutMapping("/admin/approveentry/{id}")
+	public void approveEntry(@PathVariable("id") long id) {
+		guestBookSvc.approveBookEntry(id);
 	}
 	
 	@PutMapping("/admin/editentry")
@@ -55,9 +56,9 @@ public class GuestBookController {
 	}
 	
 	
-	@DeleteMapping("/admin/removeentry")
-	public void removeEntry(@RequestParam("entryid") int entryid){
-		guestBookSvc.deleteBookEntry(entryid);
+	@DeleteMapping("/admin/removeentry/{id}")
+	public void removeEntry(@PathVariable("id") long id){
+		guestBookSvc.deleteBookEntry(id);
 	}
 	
 	@PostMapping("/guest/addentry")
@@ -79,9 +80,9 @@ public class GuestBookController {
 	public ResponseEntity<Resource> downloadFile(@RequestParam("entryid") int entryid){
 		BookEntry bookEntry = guestBookSvc.getBookEntry(entryid);
 		return ResponseEntity.ok()
-	            .contentType(MediaType.parseMediaType(bookEntry.getFileType()))
-	            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + bookEntry.getFileName() + "\"")
-	            .body(new ByteArrayResource(bookEntry.getFileData()));
+	            .contentType(MediaType.parseMediaType(bookEntry.getFiletype()))
+	            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + bookEntry.getFilename() + "\"")
+	            .body(new ByteArrayResource(bookEntry.getFiledata()));
 	}
 
 }

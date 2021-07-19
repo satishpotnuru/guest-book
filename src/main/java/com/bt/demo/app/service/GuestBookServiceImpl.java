@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bt.demo.app.constants.Constants;
+import com.bt.demo.app.exception.BookEntryNotFoundException;
 import com.bt.demo.app.exception.FileStorageException;
 import com.bt.demo.app.model.BookEntry;
 import com.bt.demo.app.model.BookEntryDTO;
@@ -34,7 +36,7 @@ public class GuestBookServiceImpl implements GuestBookService {
 		Optional<BookEntry> bookEntryOpt = bookEntryRepository.findById(id);
 		if( bookEntryOpt.isPresent()) {
 			BookEntry bookEntryEntity = bookEntryOpt.get();
-			bookEntryEntity.setStatus("Approved");
+			bookEntryEntity.setStatus(Constants.APPROVED);
 			bookEntryRepository.save(bookEntryEntity);
 		}
 	}
@@ -59,7 +61,7 @@ public class GuestBookServiceImpl implements GuestBookService {
 		BookEntry bookEntryEntity = new BookEntry();
 		bookEntryEntity.setUsername(bookentry.getUsername());
 		bookEntryEntity.setComments(bookentry.getComments());
-		bookEntryEntity.setStatus("Pending");
+		bookEntryEntity.setStatus(Constants.PENDING);
 		bookEntryRepository.save(bookEntryEntity);
 	}
 
@@ -68,8 +70,9 @@ public class GuestBookServiceImpl implements GuestBookService {
 		Optional<BookEntry> bookEntryOpt = bookEntryRepository.findById(id);
 		if( bookEntryOpt.isPresent()) {
 			return bookEntryOpt.get();
+		}else {
+			throw new BookEntryNotFoundException("Entry not found");
 		}
-		return null;
 	}
 	
 	@Override
@@ -86,10 +89,10 @@ public class GuestBookServiceImpl implements GuestBookService {
 		BookEntry bookEntryEntity = new BookEntry();
 		try {
 			String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-			bookEntryEntity.setFileName(fileName);
-			bookEntryEntity.setFileData(file.getBytes());
-			bookEntryEntity.setFileType(file.getContentType());
-			bookEntryEntity.setStatus("Pending");
+			bookEntryEntity.setFilename(fileName);
+			bookEntryEntity.setFiledata(file.getBytes());
+			bookEntryEntity.setFiletype(file.getContentType());
+			bookEntryEntity.setStatus(Constants.PENDING);
 			bookEntryRepository.save(bookEntryEntity);
 		}catch(IOException ex) {
 			throw new FileStorageException("File storing failed", ex);

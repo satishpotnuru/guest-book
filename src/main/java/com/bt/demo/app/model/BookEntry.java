@@ -19,9 +19,9 @@ public class BookEntry {
 	 private String username;
 	 private String comments;
 	 @Lob
-	 private byte[] fileData;
-	 private String fileName;
-	 private String fileType;
+	 private byte[] filedata;
+	 private String filename;
+	 private String filetype;
 	 private String status;
 	 
 	 public long getId() {
@@ -48,28 +48,26 @@ public class BookEntry {
 	 public void setStatus(String status) {
 			this.status = status;
 	 }
-	 
-	 public byte[] getFileData() {
-			return fileData;
-		}
-	 
-	 public void setFileData(byte[] fileData) {
-			this.fileData = fileData;
-		}
-	 
-	 public String getFileName() {
-			return fileName;
-		}
-	 
-	 public void setFileName(String fileName) {
-			this.fileName = fileName;
-		}
-	public String getFileType() {
-		return fileType;
+	public byte[] getFiledata() {
+		return filedata;
 	}
-	public void setFileType(String fileType) {
-		this.fileType = fileType;
+	public void setFiledata(byte[] filedata) {
+		this.filedata = filedata;
 	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	public String getFiletype() {
+		return filetype;
+	}
+	public void setFiletype(String filetype) {
+		this.filetype = filetype;
+	}
+	 
+	 
 	
 	 
 }
