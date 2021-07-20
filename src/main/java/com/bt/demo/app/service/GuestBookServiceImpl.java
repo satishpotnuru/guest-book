@@ -21,10 +21,13 @@ import com.bt.demo.app.repository.UserRepository;
 @Component
 public class GuestBookServiceImpl implements GuestBookService {
 	
-	@Autowired
-	UserRepository userRepository;
-	@Autowired
-	BookEntryRepository bookEntryRepository;
+	private UserRepository userRepository;
+	private BookEntryRepository bookEntryRepository;
+	
+	public GuestBookServiceImpl(UserRepository userRepository, BookEntryRepository bookEntryRepository) {
+		this.userRepository = userRepository;
+		this.bookEntryRepository = bookEntryRepository;
+	}
 
 	@Override
 	public List<BookEntry> getAllEntries() {
