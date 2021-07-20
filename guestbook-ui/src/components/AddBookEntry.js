@@ -29,22 +29,18 @@ class AddBookEntry extends Component {
       };
 
       onFileUpload = () => {
-    
         const formData = new FormData();
-    
         formData.append(
           'file',
           this.state.selectedFile
         );
-
-        alert(this.state.selectedFile)
-
         GuestBookService.uploadfile(formData).then(res => {
            console.log(res.data)
            this.setState({entryid : res.data.id})
        })
-        
       };  
+
+      
 
 render()
 {

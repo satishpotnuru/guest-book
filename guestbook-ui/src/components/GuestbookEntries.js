@@ -18,6 +18,7 @@ class GuestbookEntries extends Component {
 
     approveEntry(id){
         GuestBookService.approveEntry(id);
+        alert("Entry approved successfully.")
     }
 
     addEntry(){
@@ -29,20 +30,30 @@ class GuestbookEntries extends Component {
     }
 
     componentDidMount(){
-        alert('in admin')
+        alert('in gb')
+       // if(localStorage.getItem("username") === null ){
+           // this.props.history.push('/login');
+       // }
         GuestBookService.getEntries().then((response) => {
-            alert(response.data)
             this.setState({ entries : response.data})
         });
+
+       
     }
 
-   
+    logout(){
+        localStorage.removeItem("username");
+    }
 
 
     render(){
         return(
             <div className = "row">
-                  <table className = "table table-striped table-bordered">
+
+                  <br></br>
+                  Welcome Admin !
+                  <br></br>
+                  <table className = "table table-striped table-bordered" width="90%">
                            <thead>
                                 <tr>
                                     <th> Guest Name</th>

@@ -1,12 +1,10 @@
 
 import React, { Component } from 'react'
-import GuestBookService from '../services/GuestBookService'
+import axios from 'axios'
 
 
 class Login extends Component
 {
-
-    
 
     constructor(props){
         super(props)
@@ -22,18 +20,16 @@ class Login extends Component
     } 
     
 
-   login(){
-  
-      GuestBookService.getUserType(this.state.username).then(res => {
+   async login(){
+    const res = await axios.get('http://localhost:9000/api/usertype?username='+this.state.username);
         if(res && res.data){
             this.setState({usertype : res.data})
             if( this.state.usertype === "A") {
                 this.props.history.push('/home')
                }else{
                 this.props.history.push('/addbookentry')  
-               }
+               }  
         } 
-      });      
     }
 
     render(){

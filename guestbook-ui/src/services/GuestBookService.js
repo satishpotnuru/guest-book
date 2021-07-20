@@ -33,7 +33,7 @@ class GuestBookService {
 
     async getUserType(username){
         const response = await axios.get(API_BASE_URL + "usertype?username="+ username);
-        return response;
+        return await response.json();
     }
 
     uploadfile(formData){
