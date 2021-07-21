@@ -29,27 +29,15 @@ class GuestbookEntries extends Component {
         this.props.history.push(`/editbookentry/${id}`);
     }
 
-    componentDidMount(){
-        alert('in gb')
-       // if(localStorage.getItem("username") === null ){
-           // this.props.history.push('/login');
-       // }
+    componentDidMount() {
         GuestBookService.getEntries().then((response) => {
             this.setState({ entries : response.data})
-        });
-
-       
+        });  
     }
-
-    logout(){
-        localStorage.removeItem("username");
-    }
-
 
     render(){
         return(
             <div className = "row">
-
                   <br></br>
                   Welcome Admin !
                   <br></br>
