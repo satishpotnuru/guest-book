@@ -11,7 +11,7 @@ import com.bt.demo.app.model.BookEntryDTO;
 @Service
 public interface GuestBookService {
 	
-	String getUserType(String username);
+	String getUserRole(String username);
 	BookEntry getBookEntry(long id);
 	List<BookEntry> getAllEntries();
 	void approveBookEntry(long id);

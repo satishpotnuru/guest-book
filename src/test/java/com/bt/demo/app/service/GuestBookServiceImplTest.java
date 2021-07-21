@@ -37,8 +37,8 @@ public class GuestBookServiceImplTest {
 	 @Test
 	 public void getUserTypeTest() {
 		 User user = new User();
-		 user.setType("A");
-		 String userType = guestBookService.getUserType("test");
+		 user.setRole("A");
+		 String userType = guestBookService.getUserRole("test");
 		 Mockito.when(userRepository.findByUsername(Mockito.any())).thenReturn(user);
 		 assertEquals(userType, "A");
 	 }

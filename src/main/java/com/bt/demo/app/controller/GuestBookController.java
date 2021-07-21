@@ -66,9 +66,9 @@ public class GuestBookController {
 		guestBookSvc.addBookEntry(bookentry);
 	}
 	
-	@GetMapping("/usertype")
-	public String getUserType(@RequestParam("username") String username) {
-		return guestBookSvc.getUserType(username);
+	@GetMapping("/userrole")
+	public String getUserRole(@RequestParam("username") String username) {
+		return guestBookSvc.getUserRole(username);
 	}
 	
 	@PostMapping("/uploadfile")

@@ -78,10 +78,10 @@ public class GuestBookServiceImpl implements GuestBookService {
 	}
 	
 	@Override
-	public String getUserType(String username) {
+	public String getUserRole(String username) {
 		if(username != null) {
 			User user = userRepository.findByUsername(username);
-			return user != null ? user.getType() : null;
+			return user != null ? user.getRole() : null;
 		}
 		else return null;
 	}

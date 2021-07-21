@@ -10,21 +10,20 @@ import javax.persistence.Table;
 @Entity
 @Table(name="users")
 public class User {
-	
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.AUTO)
-	 @Column(name="id")
-	 private int id;
-	 private String username;
-	 private String name;
-	 private String password;
-	 private String type;
-	 
-	 
+
+	@Id
+	@Column(name = "user_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String username;
+	private String password;
+	private String role;
+
+
 	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getUsername() {
@@ -33,23 +32,18 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getType() {
-		return type;
+	public String getRole() {
+		return role;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setRole(String role) {
+		this.role = role;
 	} 
 
 }
