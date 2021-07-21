@@ -38,7 +38,6 @@ class GuestbookEntries extends Component {
     render(){
         return(
             <div className = "row">
-
                   <br></br>
                   Welcome Admin !
                   <br></br>
