@@ -35,7 +35,7 @@ public class GuestBookServiceImplTest {
 	 }
 	 
 	 @Test
-	 public void getUserTypeTest() {
+	 public void getUserRoleTest() {
 		 User user = new User();
 		 user.setRole("A");
 		 String userType = guestBookService.getUserRole("test");
