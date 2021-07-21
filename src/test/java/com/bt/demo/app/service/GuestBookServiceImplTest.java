@@ -2,6 +2,8 @@ package com.bt.demo.app.service;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Optional;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import com.bt.demo.app.exception.BookEntryNotFoundException;
+import com.bt.demo.app.model.BookEntry;
 import com.bt.demo.app.model.User;
 import com.bt.demo.app.repository.BookEntryRepository;
 import com.bt.demo.app.repository.UserRepository;
@@ -45,4 +48,14 @@ public class GuestBookServiceImplTest {
 		 guestBookService.getBookEntry(12345L);
 		 Mockito.when(bookEntryRepository.findById(12345L)).thenReturn(null);
 	 }
+	 
+	 @Test
+	 public void approveEntityTest() {
+		 BookEntry existingEntry = new BookEntry();
+		 Optional<BookEntry> val = Optional.of(existingEntry);
+		 guestBookService.approveBookEntry(1234L);
+		 Mockito.when(bookEntryRepository.findById(1234L)).thenReturn(val);
+		 Mockito.verify(bookEntryRepository).save(existingEntry);
+	 }
+	 
 }

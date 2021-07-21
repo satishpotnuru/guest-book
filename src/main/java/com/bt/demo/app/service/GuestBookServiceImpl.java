@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -82,7 +81,7 @@ public class GuestBookServiceImpl implements GuestBookService {
 	public String getUserType(String username) {
 		if(username != null) {
 			User user = userRepository.findByUsername(username);
-			return user.getType();
+			return user != null ? user.getType() : null;
 		}
 		else return null;
 	}
