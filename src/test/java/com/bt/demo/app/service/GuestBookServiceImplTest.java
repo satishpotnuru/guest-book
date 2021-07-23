@@ -14,6 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.bt.demo.app.exception.BookEntryNotFoundException;
 import com.bt.demo.app.model.BookEntry;
 import com.bt.demo.app.model.User;
+import com.bt.demo.app.model.UserDTO;
 import com.bt.demo.app.repository.BookEntryRepository;
 import com.bt.demo.app.repository.UserRepository;
 
@@ -36,10 +37,13 @@ public class GuestBookServiceImplTest {
 	 
 	 @Test
 	 public void getUserRoleTest() {
+		 UserDTO userdto = new UserDTO();
+		 userdto.setUsername("Admin");
+		 userdto.setPassword("pwd123");
 		 User user = new User();
 		 user.setRole("A");
-		 String userType = guestBookService.getUserRole("test");
-		 Mockito.when(userRepository.findByUsername(Mockito.any())).thenReturn(user);
+		 String userType = guestBookService.getUserRole(userdto);
+		 Mockito.when(userRepository.findUser(Mockito.any(), Mockito.any())).thenReturn(user);
 		 assertEquals(userType, "A");
 	 }
 	 

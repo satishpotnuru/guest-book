@@ -66,8 +66,5 @@ public class BookEntry {
 	public void setFiletype(String filetype) {
 		this.filetype = filetype;
 	}
-	 
-	 
-	
-	 
+	  
 }

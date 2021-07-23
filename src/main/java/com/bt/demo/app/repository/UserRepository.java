@@ -1,16 +1,15 @@
 package com.bt.demo.app.repository;
 
-import java.util.List;
-
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.bt.demo.app.model.User;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Integer>{
+public interface UserRepository extends CrudRepository<User, Long>{
 	
-	User findByUsername(String username);
+	@Query("SELECT u FROM User u WHERE u.username = :username and u.password = :password")
+	User findUser(String username, String password);
 
 }

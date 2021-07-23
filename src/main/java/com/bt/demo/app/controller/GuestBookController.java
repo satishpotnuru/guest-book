@@ -23,6 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bt.demo.app.model.BookEntry;
 import com.bt.demo.app.model.BookEntryDTO;
+import com.bt.demo.app.model.User;
+import com.bt.demo.app.model.UserDTO;
 import com.bt.demo.app.service.GuestBookService;
 
 @RestController
@@ -33,7 +35,12 @@ public class GuestBookController {
 	@Autowired
 	private GuestBookService guestBookSvc;
 	
+	@PostMapping("/signin")
+	public String getUserRole(@RequestBody UserDTO user) {
+		return guestBookSvc.getUserRole(user);
+	}
 	
+
 	@GetMapping("/admin/entries")
 	public List<BookEntry> getEntries() {
 		return guestBookSvc.getAllEntries();
@@ -66,10 +73,6 @@ public class GuestBookController {
 		guestBookSvc.addBookEntry(bookentry);
 	}
 	
-	@GetMapping("/userrole")
-	public String getUserRole(@RequestParam("username") String username) {
-		return guestBookSvc.getUserRole(username);
-	}
 	
 	@PostMapping("/uploadfile")
     public BookEntry uploadFile(@RequestParam("file") MultipartFile file) {

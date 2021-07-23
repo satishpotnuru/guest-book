@@ -14,6 +14,7 @@ import com.bt.demo.app.exception.FileStorageException;
 import com.bt.demo.app.model.BookEntry;
 import com.bt.demo.app.model.BookEntryDTO;
 import com.bt.demo.app.model.User;
+import com.bt.demo.app.model.UserDTO;
 import com.bt.demo.app.repository.BookEntryRepository;
 import com.bt.demo.app.repository.UserRepository;
 
@@ -78,10 +79,10 @@ public class GuestBookServiceImpl implements GuestBookService {
 	}
 	
 	@Override
-	public String getUserRole(String username) {
-		if(username != null) {
-			User user = userRepository.findByUsername(username);
-			return user != null ? user.getRole() : null;
+	public String getUserRole(UserDTO user) {
+		if(user != null) {
+			User userDb = userRepository.findUser(user.getUsername(), user.getPassword());
+			return userDb != null ? userDb.getRole() : "Invalid User";
 		}
 		else return null;
 	}
