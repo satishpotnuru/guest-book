@@ -6,7 +6,7 @@ class AddBookEntry extends Component {
     constructor(props){
         super(props)
         this.state = {
-            username : 'sat',
+            username : '',
             comment : '' ,
             selectedFile : null,
             entryid : ''
@@ -15,7 +15,9 @@ class AddBookEntry extends Component {
     }
 
     addEntry(){
-        let data = {id : 0, username : 'sat', comments : this.state.comment};
+        let user = sessionStorage.getItem("username")
+        let entryid = this.state.entryid ? this.state.entryid : 0
+        let data = {id : entryid, username : user , comments : this.state.comment};
         GuestBookService.addEntry(data);
         alert("Entry added successfully")
     }   
@@ -40,50 +42,57 @@ class AddBookEntry extends Component {
        })
       };  
 
-      
+      componentDidMount(){
+        let user = sessionStorage.getItem("username");
+        if(user === null ){
+            this.props.history.push('/login');
+        }else{
+            this.setState({username : user})
+        }
+    }
 
-render()
-{
-   return(
-        <div>
-            <form>
-            <table>
-                <h2>Welcome Guest!!</h2>
-                <br></br>
-                <h4>Please add comment or upload image</h4>
-                <br></br>
-                <tbody>
-                <tr>
-                    <td> 
-                    Comment : <input type="text" value={this.state.commenttxt} name="comment" onChange={this.changeCommentHandler}></input>
-                    </td>
-                </tr>
-
-                <br></br>
-
-                <tr>
-                    <td>
-                    <input type="file" onChange={this.onFileChange} />
-                    <button onClick={this.onFileUpload}> Upload
-                </button>
-                    </td>
-                </tr>
-
-                <br></br>
-
-                <tr>
-                    <td>
-                        <button onClick={() => this.addEntry()}>Add Entry</button>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-            </form>
-        </div>
-   )
-
-}
+    render()
+    {
+       return(
+            <div>
+                <form>
+                <table>
+                    <h2>Welcome {this.state.username}</h2>
+                    <br></br>
+                    <h4>Please add comment or upload image</h4>
+                    <br></br>
+                    <tbody>
+                    <tr>
+                        <td> 
+                        Comment : <input type="text" value={this.state.commenttxt} name="comment" onChange={this.changeCommentHandler}></input>
+                        </td>
+                    </tr>
+    
+                    <br></br>
+    
+                    <tr>
+                        <td>
+                        <input type="file" onChange={this.onFileChange} />
+                        <button onClick={this.onFileUpload}> Upload
+                    </button>
+                        </td>
+                    </tr>
+    
+                    <br></br>
+    
+                    <tr>
+                        <td>
+                            <button onClick={() => this.addEntry()}>Add Entry</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+    
+                </form>
+            </div>
+       )
+    
+    }
    
 }
 

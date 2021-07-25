@@ -14,7 +14,7 @@ class App extends Component {
       <Switch>
       <Route path="/login" component={ Login } />
       <Route path="/home" component={ GuestbookEntries }/>
-      <Route path="/addbookentry" component={ AddBookEntry } exact />
+      <Route path="/addbookentry" component={ AddBookEntry } />
       <Route path="/editbookentry/:id" component={ EditBookEntry }/>
       </Switch>
       </BrowserRouter>

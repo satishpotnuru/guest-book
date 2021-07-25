@@ -29,15 +29,21 @@ class GuestbookEntries extends Component {
         this.props.history.push(`/editbookentry/${id}`);
     }
 
-    componentDidMount() {
+    componentDidMount(){
+       if(sessionStorage.getItem("username") === null || sessionStorage.getItem("userrole") !== 'ROLE_ADMIN'){
+           this.props.history.push('/login');
+       }
         GuestBookService.getEntries().then((response) => {
             this.setState({ entries : response.data})
-        });  
+        });
+   
     }
+
 
     render(){
         return(
             <div className = "row">
+
                   <br></br>
                   Welcome Admin !
                   <br></br>
