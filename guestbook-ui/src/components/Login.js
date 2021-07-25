@@ -28,13 +28,13 @@ class Login extends Component
     async login(){
         alert('coming')
         let data = {username : this.state.username, password : this.state.password};
-        const res = await axios.post('http://localhost:8090/api/signin', data)
+        const res = await axios.post('http://localhost:9000/api/signin', data)
             if(res && res.data){
                 this.setState({userRole : res.data})
                 if( this.state.userRole === "ROLE_ADMIN") {
                     sessionStorage.setItem("username", this.state.username)
                     sessionStorage.setItem("userrole","ROLE_ADMIN")
-                    this.props.history.push('/home')
+                    this.props.history.push('/main')
                 }else if(this.state.userRole === "ROLE_USER"){
                     sessionStorage.setItem("username", this.state.username)
                     sessionStorage.setItem("userrole","ROLE_USER")

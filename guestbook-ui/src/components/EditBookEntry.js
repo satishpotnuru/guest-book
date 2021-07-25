@@ -8,14 +8,17 @@ class EditBookEntry extends Component{
 
         this.state = {
             id: this.props.match.params.id,
-            comment : ''
+            comment : '',
+            userid : ''
         }
     }
 
     componentDidMount(){
         GuestBookService.getEntry(this.state.id).then( res => {
             let dbcomment = res.data.comments;
-            this.setState({ comment : dbcomment})
+            let username = res.data.username
+            this.setState({ comment : dbcomment,
+            userid : username})
         })
     }
 
@@ -35,6 +38,11 @@ class EditBookEntry extends Component{
             <div>
                 <form>
                 <table>
+                    <tr>
+                        <td> 
+                        User :    {this.state.userid} 
+                        </td>
+                    </tr>
                     <tr>
                         <td> 
                         Comment :    <input type="text" value={this.state.comment} name="comment" onChange={this.changeCommentHandler}></input>

@@ -37,7 +37,6 @@ class GuestBookService {
     }
 
     uploadfile(formData){
-        alert('coming')
         const response = axios.post(API_BASE_URL + "uploadfile", formData, 
         { headers : {'Content-Type': 'multipart/form-data' }})
       return response;

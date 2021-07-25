@@ -3,6 +3,7 @@ import GuestbookEntries from './components/GuestbookEntries';
 import Login from './components/Login';
 import AddBookEntry from './components/AddBookEntry'
 import EditBookEntry from './components/EditBookEntry'
+import Header from './components/Header'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 class App extends Component {
@@ -12,10 +13,19 @@ class App extends Component {
       <div>
       <BrowserRouter>
       <Switch>
-      <Route path="/login" component={ Login } />
-      <Route path="/home" component={ GuestbookEntries }/>
-      <Route path="/addbookentry" component={ AddBookEntry } />
-      <Route path="/editbookentry/:id" component={ EditBookEntry }/>
+      <Route path="/login" component={ Login } />  
+      <Route exact path="/home">
+            <Header />
+            <GuestbookEntries />
+      </Route>
+      <Route exact path="/addbookentry">
+            <Header />
+            <AddBookEntry />
+      </Route>
+      <Route exact path="/editbookentry/:id">
+            <Header />
+            <EditBookEntry />
+      </Route>
       </Switch>
       </BrowserRouter>
       </div>

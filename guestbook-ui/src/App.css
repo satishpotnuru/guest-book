@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+.logoutLblPos{
+
+  position:fixed;
+  right:10px;
+  top:5px;
+}
+
+

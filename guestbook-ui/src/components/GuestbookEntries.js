@@ -29,6 +29,7 @@ class GuestbookEntries extends Component {
         this.props.history.push(`/editbookentry/${id}`);
     }
 
+
     componentDidMount(){
        if(sessionStorage.getItem("username") === null || sessionStorage.getItem("userrole") !== 'ROLE_ADMIN'){
            this.props.history.push('/login');
@@ -43,7 +44,6 @@ class GuestbookEntries extends Component {
     render(){
         return(
             <div className = "row">
-
                   <br></br>
                   Welcome Admin !
                   <br></br>
