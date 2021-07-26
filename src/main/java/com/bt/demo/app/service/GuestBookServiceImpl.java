@@ -20,10 +20,10 @@ import com.bt.demo.app.repository.UserRepository;
 
 @Component
 public class GuestBookServiceImpl implements GuestBookService {
-	
+
 	private UserRepository userRepository;
 	private BookEntryRepository bookEntryRepository;
-	
+
 	public GuestBookServiceImpl(UserRepository userRepository, BookEntryRepository bookEntryRepository) {
 		this.userRepository = userRepository;
 		this.bookEntryRepository = bookEntryRepository;
@@ -37,7 +37,7 @@ public class GuestBookServiceImpl implements GuestBookService {
 	@Override
 	public void approveBookEntry(long id) {
 		Optional<BookEntry> bookEntryOpt = bookEntryRepository.findById(id);
-		if( bookEntryOpt.isPresent()) {
+		if (bookEntryOpt.isPresent()) {
 			BookEntry bookEntryEntity = bookEntryOpt.get();
 			bookEntryEntity.setStatus(Constants.APPROVED);
 			bookEntryRepository.save(bookEntryEntity);
@@ -52,11 +52,11 @@ public class GuestBookServiceImpl implements GuestBookService {
 	@Override
 	public void updateBookEntry(BookEntryDTO bookentry) {
 		Optional<BookEntry> bookEntryOpt = bookEntryRepository.findById(bookentry.getId());
-		if(bookEntryOpt.isPresent()) {
-		  BookEntry bookEntryEntity = bookEntryOpt.get();
-		  bookEntryEntity.setComments(bookentry.getComments());
-		  bookEntryRepository.save(bookEntryEntity); 
-		  }
+		if (bookEntryOpt.isPresent()) {
+			BookEntry bookEntryEntity = bookEntryOpt.get();
+			bookEntryEntity.setComments(bookentry.getComments());
+			bookEntryRepository.save(bookEntryEntity);
+		}
 	}
 
 	@Override
@@ -71,22 +71,22 @@ public class GuestBookServiceImpl implements GuestBookService {
 	@Override
 	public BookEntry getBookEntry(long id) {
 		Optional<BookEntry> bookEntryOpt = bookEntryRepository.findById(id);
-		if( bookEntryOpt.isPresent()) {
+		if (bookEntryOpt.isPresent()) {
 			return bookEntryOpt.get();
-		}else {
+		} else {
 			throw new BookEntryNotFoundException("Entry not found");
 		}
 	}
-	
+
 	@Override
 	public String getUserRole(UserDTO user) {
-		if(user != null) {
+		if (user != null) {
 			User userDb = userRepository.findUser(user.getUsername(), user.getPassword());
 			return userDb != null ? userDb.getRole() : "Invalid User";
-		}
-		else return null;
+		} else
+			return null;
 	}
-	
+
 	@Override
 	public BookEntry uploadFile(MultipartFile file) {
 		BookEntry bookEntryEntity = new BookEntry();
@@ -97,11 +97,10 @@ public class GuestBookServiceImpl implements GuestBookService {
 			bookEntryEntity.setFiletype(file.getContentType());
 			bookEntryEntity.setStatus(Constants.PENDING);
 			bookEntryRepository.save(bookEntryEntity);
-		}catch(IOException ex) {
+		} catch (IOException ex) {
 			throw new FileStorageException("File storing failed", ex);
 		}
 		return bookEntryEntity;
 	}
 
-}
-;
+};

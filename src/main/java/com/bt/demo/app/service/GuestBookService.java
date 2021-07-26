@@ -11,13 +11,20 @@ import com.bt.demo.app.model.UserDTO;
 
 @Service
 public interface GuestBookService {
-	
+
 	String getUserRole(UserDTO user);
+
 	BookEntry getBookEntry(long id);
+
 	List<BookEntry> getAllEntries();
+
 	void approveBookEntry(long id);
+
 	void deleteBookEntry(long id);
+
 	void updateBookEntry(BookEntryDTO bookentry);
+
 	void addBookEntry(BookEntryDTO bookentry);
-    BookEntry uploadFile(MultipartFile file);
+
+	BookEntry uploadFile(MultipartFile file);
 }
