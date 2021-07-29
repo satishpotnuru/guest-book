@@ -61,11 +61,20 @@ public class GuestBookServiceImpl implements GuestBookService {
 
 	@Override
 	public void addBookEntry(BookEntryDTO bookentry) {
-		BookEntry bookEntryEntity = new BookEntry();
-		bookEntryEntity.setUsername(bookentry.getUsername());
-		bookEntryEntity.setComments(bookentry.getComments());
-		bookEntryEntity.setStatus(Constants.PENDING);
-		bookEntryRepository.save(bookEntryEntity);
+		
+		BookEntry bookEntryDb = null;
+		if(bookentry.getId() != 0) {
+			Optional<BookEntry> bookEntryOpt = bookEntryRepository.findById(bookentry.getId());
+			if (bookEntryOpt.isPresent()) {
+				bookEntryDb = bookEntryOpt.get();	
+			}
+		}
+		if(bookEntryDb == null)
+		bookEntryDb = new BookEntry();
+		bookEntryDb.setUsername(bookentry.getUsername());
+		bookEntryDb.setComments(bookentry.getComments());
+		bookEntryDb.setStatus(Constants.PENDING);
+		bookEntryRepository.save(bookEntryDb);
 	}
 
 	@Override
